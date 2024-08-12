@@ -1,4 +1,4 @@
-FROM ros:iron
+FROM osrf/ros:iron-desktop
 
 RUN apt-get update && apt-get install -y
 
@@ -15,6 +15,12 @@ RUN useradd -ms /bin/bash user \
 USER user
 
 # Set the working directory
-WORKDIR /home/user 
+WORKDIR /home/user/ros2_ws
+
+# Copy a setup file
+COPY ./source.sh /home/user/ros2_ws/
+COPY ./source_local.sh /home/user/ros2_ws/
+
+# RUN chown -R user:user /home/user/ros2_ws
 
 
